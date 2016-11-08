@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CST2335-实验</string>
+    <string name="hello">你好，世界!</string>
+    <string name="ImButton">按钮</string>
+
+</resources>
