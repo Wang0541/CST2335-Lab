@@ -18,7 +18,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
-        <activity android:name=".ListItemActivity">
+        <activity android:name=".ListItemsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
