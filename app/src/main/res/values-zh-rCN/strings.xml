@@ -20,4 +20,11 @@
     <string name="dialog_title">Exit?</string>
     <string name="ok">Yes</string>
     <string name="cancel">Cancel</string>
+
+    <string name="ButtonTextStart">Chat button</string>
+    <string name="sent_button"> Sent</string>
+
+    <string name="title_activity_chat_window">ChatWindow</string>
+    <string name="message_textView">new Text</string>
+    <string name="image_desc">Call out/in</string>
 </resources>
