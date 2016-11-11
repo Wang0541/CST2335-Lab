@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import static android.R.attr.onClick;
 
 public class StartActivity extends AppCompatActivity {
     protected static final String ACTIVITY_NAME = "StartActivity";
@@ -22,14 +21,25 @@ public class StartActivity extends AppCompatActivity {
         Button start_button = (Button)findViewById(R.id.button);
         Button start_chatButton = (Button)findViewById(R.id.Chat_button);
         Button weather_button =(Button)findViewById(R.id.weather_button);
+        Button toolbar_button = (Button)findViewById(R.id.toolbar_button);
+
+
+        toolbar_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentTool = new Intent(StartActivity.this, TestToolbar.class);
+                startActivity(intentTool);
+            }
+        });
+
 
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StartActivity.this, ListItemsActivity.class);
+                Intent intentStart = new Intent(StartActivity.this, ListItemsActivity.class);
                 //data back from the activity
                 // get the result from this class when called onActivityResult
-                startActivityForResult(intent, 5);
+                startActivityForResult(intentStart, 5);
             }
         });
 
@@ -61,13 +71,10 @@ public class StartActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == 5){
-
-            String messagePassed = data.getStringExtra("Response");
-            Log.i("abcd", messagePassed);
             //look in the “extra data” container of the Intent to see if there is a string called “Response”.
             if(resultCode ==Activity.RESULT_OK) {
-
-                Log.i(ACTIVITY_NAME,"Returned to StartActivity.onActivityRestult");
+                String messagePassed = data.getStringExtra("Response");
+                Log.i(ACTIVITY_NAME,"Returned to StartActivity.onActivityResult");
                 CharSequence text = "ListItemsActivity passed: " + messagePassed;
                 int duration = Toast.LENGTH_LONG;
                 Toast toast = Toast.makeText(StartActivity.this, text, duration);
