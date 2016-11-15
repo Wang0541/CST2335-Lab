@@ -18,14 +18,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static com.example.yu.cst2335_lab.R.id.newMessage;
 
 
 public class TestToolbar extends AppCompatActivity {
+    private View dialogView;
     public static final String TOOLBAR_MESSAGE ="Toolbar";
     public static final String DIALOG_TITLE = "Do you want to go back?";
     FloatingActionButton fab;
-
+    String message  = "Item1 is selected";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,8 @@ public class TestToolbar extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Show SnackBar action", Snackbar.LENGTH_LONG)
+
+                Snackbar.make(view, "Hello!! Get away from me" , Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -54,13 +57,10 @@ public class TestToolbar extends AppCompatActivity {
         switch(id){
             case R.id.item1:
                 Log.d(TOOLBAR_MESSAGE,"Item1 is selected");
-                fab.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view, "You selected item 1", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
-                });
+
+                Snackbar.make(findViewById(R.id.toolbar), message, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
 
                 break;
             case R.id.item2:
@@ -97,22 +97,17 @@ public class TestToolbar extends AppCompatActivity {
 
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
-                builder2.setView(inflater.inflate(R.layout.dialog, null))
+                dialogView = inflater.inflate(R.layout.dialog, null);
+                builder2.setView(dialogView)
                         // Add action buttons
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                // sign in the user ...
-                                fab.setOnClickListener(new View.OnClickListener() {
-                                    EditText newMessage;
-                                    @Override
-                                    public void onClick(View view) {
-                                        newMessage = (EditText) findViewById(R.id.newMessage);
-                                        Log.i("abc",newMessage.getText().toString());
-                                        Snackbar.make(view, newMessage.getText().toString(), Snackbar.LENGTH_LONG)
-                                                .setAction("Action", null).show();
-                                    }
-                                });
+                                EditText newMessage = (EditText) dialogView.findViewById(R.id.newMessage);
+                                message = newMessage.getText().toString();
+                                Snackbar.make(findViewById(R.id.toolbar), message, Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null);
+
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -125,8 +120,8 @@ public class TestToolbar extends AppCompatActivity {
                 break;
             case R.id.item4:
                 Log.d(TOOLBAR_MESSAGE,"Item4 is selected");
-                Toast toast = Toast.makeText(TestToolbar.this , "Version 1.0, by Yu Wang", Toast.LENGTH_SHORT);
-                toast.show();
+                Toast toast3 = Toast.makeText(TestToolbar.this , "Version 1.0, by Yu Wang", Toast.LENGTH_SHORT);
+                toast3.show();
                 break;
         }
         return true;
